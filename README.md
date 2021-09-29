@@ -1,2 +1,3 @@
-# data-tutorial
-Documentation for use of data in bbnavi
+# documentation
+project bbnavi doing its first steps with DigiTransit and OpenTripPlanner.  
+We will work on documentation in the upcoming weeks
