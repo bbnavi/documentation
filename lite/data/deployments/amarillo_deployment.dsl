@@ -1,16 +1,15 @@
-/* This deployment diagram is the same for any of the following stacks: bbnavi Datahub, bbnavi Datahub CMS, commonsbookings2gbfs, moqo2gbfs, opentripplaner, amarillo, gtfs-rt-feed, bbnavi-datahub-tmb-importer */
-workspace standard_deployment {
+workspace amarillo_deployment {
   model {
-     deployment_system = softwareSystem deployment_system {
-       stack = container "Stack" 
+     amarillo = softwareSystem amarillo {
+       amarillo_stack = container "Amarillo Stack"
        github_actions = container "Github Actions"
        remote_git_repository = container "Remote Git Repository"
        local_git_repository = container "Local Repository Clone" 
        image_registry = container "Docker Image Registry" "registry.gitlab.tpwd.de"
     }
-    github_actions -> stack "creates/updates"
+    github_actions -> amarillo_stack "creates/updates"
     github_actions -> image_registry "builds and pushes new images"
-    stack -> image_registry "pulls images"
+    amarillo_stack -> image_registry "pulls images"
     local_git_repository -> remote_git_repository "push"
     remote_git_repository -> github_actions "triggers"
 
@@ -18,7 +17,7 @@ workspace standard_deployment {
 
       deploymentNode "Planetary Networks" "" "tpwd-bb-navi.customer.planetary-quantum.net" "" {
         deploymentNode "Swarm Worker" "Docker" "" "" {
-          containerInstance stack "bbnavi Datahub"
+          containerInstance amarillo_stack "bbnavi Datahub"
         }
       }
       deploymentNode "Github" {
@@ -35,7 +34,7 @@ workspace standard_deployment {
   }
 
   views {
-    deployment deployment_system "Live" "LiveDeployment" {
+    deployment amarillo "Live" "LiveDeployment" {
       include *
       autoLayout
     }

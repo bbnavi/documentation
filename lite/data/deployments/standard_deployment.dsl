@@ -1,8 +1,7 @@
-/* This deployment diagram is the same for any of the following stacks: bbnavi Datahub, bbnavi Datahub CMS, commonsbookings2gbfs, moqo2gbfs, opentripplaner, amarillo, gtfs-rt-feed, bbnavi-datahub-tmb-importer */
 workspace standard_deployment {
   model {
      deployment_system = softwareSystem deployment_system {
-       stack = container "Stack" 
+       stack = container "Stack" "This deployment diagram is the same for any of the following stacks: bbnavi Datahub, bbnavi Datahub CMS, commonsbookings2gbfs, moqo2gbfs, opentripplaner, amarillo, gtfs-rt-feed, bbnavi-datahub-tmb-importer"
        github_actions = container "Github Actions"
        remote_git_repository = container "Remote Git Repository"
        local_git_repository = container "Local Repository Clone" 
