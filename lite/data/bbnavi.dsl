@@ -15,8 +15,12 @@ workspace "bbnavi" {
             }
 
             otp = softwareSystem "OpenTripPlanner"
+
             # todo: amarillo
-            amarillo = softwareSystem "Amarillo"
+            amarillo = softwareSystem "Amarillo" {
+                service = container "Amarillo Service"
+                filesystem = container "Amarillo Filesystem"
+            }
             # todo: barshare-gbfs
 
             # todo: staging-otp
@@ -77,6 +81,14 @@ workspace "bbnavi" {
                 url "https://nutzung.bbnavi.de"
             }
         }
+
+        # Relations
+
+        # Amarillo
+        amarillo.service -> amarillo.filesystem "Lädt daten von"
+
+        # Datahub
+        otp -> amarillo.service "Lädt Daten von"
 
         # Digitransit Relations
         digitransit -> otp "Sammelt Daten von"
@@ -144,6 +156,16 @@ workspace "bbnavi" {
         }
 
         systemcontext datahub_server "Datahub-System" {
+            include *
+            autoLayout
+        }
+
+        systemcontext amarillo "Amarillo" {
+            include *
+            autoLayout
+        }
+
+        container amarillo "Amarillo-System" {
             include *
             autoLayout
         }
