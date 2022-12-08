@@ -4,7 +4,7 @@ workspace standard_deployment {
        stack = container "Stack" "This deployment diagram is the same for any of the following stacks: bbnavi Datahub, bbnavi Datahub CMS, commonsbookings2gbfs, moqo2gbfs, opentripplaner, amarillo, gtfs-rt-feed, bbnavi-datahub-tmb-importer"
        github_actions = container "Github Actions"
        remote_git_repository = container "Remote Git Repository"
-       local_git_repository = container "Local Repository Clone" 
+       local_git_repository = container "Local Repository Clone"
        image_registry = container "Docker Image Registry" "registry.gitlab.tpwd.de"
     }
     github_actions -> stack "creates/updates"
@@ -28,7 +28,7 @@ workspace standard_deployment {
         containerInstance local_git_repository
       }
       deploymentNode "Gitlab" {
-        containerInstance image_registry 
+        containerInstance image_registry
       }
     }
   }
