@@ -15,6 +15,7 @@ workspace "bbnavi" {
             }
 
             otp = softwareSystem "OpenTripPlanner"
+            otp_staging = softwareSystem "OpenTripPlanner Staging"
 
             # todo: amarillo
             amarillo = softwareSystem "Amarillo" {
@@ -80,6 +81,31 @@ workspace "bbnavi" {
             matomo = container "Matomo" "Analytics" "Matomo" {
                 url "https://nutzung.bbnavi.de"
             }
+            uptime_robot = container "Uptime Robot" "Monitoring" "Uptime Robot" {
+                url "https://stats.uptimerobot.com/rvnpZhrzLk"
+                datahub_vector_tile = component "Datahub: vector tiles" "https://tiles.bbnavi.de/public.poi_coords_e_bike_rentals/18/141267/85371.pbf" "HTTPS"{
+                    url "https://tiles.bbnavi.de/public.poi_coords_e_bike_rentals/18/141267/85371.pbf"
+                }
+                datahub_web_ui = component "Datahub: Web UI" "https://datahub.bbnavi.de/" "HTTPS"{
+                    url "https://datahub.bbnavi.de/"
+                }
+                otp_prod = component "OTP Prod" "https://api.bbnavi.de/otp/actuators/health" "HTTPS"{
+                    url "https://api.bbnavi.de/otp/actuators/health"
+                }
+                otp_prod_key = component "OTP Prod Keyword" "https://api.bbnavi.de/otp/actuators/health" "Keyword UP"{
+                    url "https://api.bbnavi.de/otp/actuators/health"
+                }
+                otp_staging = component "OTP Staging" "https://staging.api.bbnavi.de/otp/actuators/health" "HTTPS"{
+                    url "https://staging.api.bbnavi.de/otp/actuators/health"
+                }
+                otp_staging_key = component "OTP Staging Keyword" "https://staging.api.bbnavi.de/otp/actuators/health" "Keyword UP"{
+                    url "https://staging.api.bbnavi.de/otp/actuators/health"
+                }
+            }
+            alerts = container  "Alerts" "Notifications"{
+                slack = component "Slack"
+                email = component "Email"
+            }
         }
 
         # Relations
@@ -131,6 +157,8 @@ workspace "bbnavi" {
         monitoring.prometheus -> monitoring.metrics_collector "Sammelt Daten von"
         monitoring.grafana -> monitoring.prometheus  "Sammelt Daten von"
         monitoring.grafana -> monitoring.loki  "Sammelt Daten von"
+        monitoring.grafana -> monitoring.alerts.slack "Sendet Alerts zu"
+        monitoring.grafana -> monitoring.alerts.email "Sendet Alerts zu"
         monitoring.metrics_collector -> otp "Sammelt Daten von"
         wordpress_bbnavi -> monitoring.loki "Schreibt Log-Daten zu"
         wordpress_mitfahren -> monitoring.loki "Schreibt Log-Daten zu"
@@ -139,6 +167,15 @@ workspace "bbnavi" {
         tmb_importer -> monitoring.loki "Schreibt Log-Daten zu"
         datahub_server -> monitoring.loki "Schreibt Log-Daten zu"
         datahub_cms -> monitoring.loki "Schreibt Log-Daten zu"
+        monitoring.uptime_robot -> monitoring.alerts.slack "Sendet Alerts zu"
+        monitoring.uptime_robot -> monitoring.alerts.email "Sendet Alerts zu"
+        monitoring.uptime_robot.datahub_vector_tile -> datahub_server.tile_server "Überwacht"
+        monitoring.uptime_robot.datahub_web_ui -> datahub_server.app "Überwacht"
+        monitoring.uptime_robot.otp_prod -> otp "Überwacht"
+        monitoring.uptime_robot.otp_prod_key -> otp "Überwacht"
+        monitoring.uptime_robot.otp_staging -> otp_staging "Überwacht"
+        monitoring.uptime_robot.otp_staging_key -> otp_staging "Überwacht"
+
 
     }
 
@@ -187,6 +224,11 @@ workspace "bbnavi" {
         }
 
         container monitoring "Monitoring" {
+            include *
+            autoLayout
+        }
+
+        component monitoring.uptime_robot "UptimeRobot" {
             include *
             autoLayout
         }
