@@ -10,7 +10,7 @@ structurizr-cli push  -w data/bbnavi.dsl -id 3 -key KEY -secret SECRET -url http
 ```
 
 
-<div style="text-align:center"><img src="./images/bb-navi-app-rund-rot_png.png" class="center"></img></div>
+<img src="./images/bb-navi-app-rund-rot_png.png" class="center"></img>
 
 _______
 
@@ -66,13 +66,14 @@ _______________
 | [opentripplaner-berlin-brandenburg](https://github.com/bbnavi/opentripplaner-berlin-brandenburg) | no desription, Readme with just log| 
 | [planetary-quantum](https://github.com/bbnavi/planetary-quantum)| Deploy complete Stack to Planetary Quantum, more description wanted, readme incomplete |
 
-
-
-
-
-
-
-
 ## Licensing
 ____________
 
+<style>
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
