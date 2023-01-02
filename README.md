@@ -14,9 +14,12 @@ structurizr-cli push  -w data/bbnavi.dsl -id 3 -key KEY -secret SECRET -url http
 
 _______
 
+[About this project](#about-this-projectabout-this-project) | [Who we are](#who-we-arewho-we-are) | [Working language](#working-languageworking-language) | [Our  documentation](#our-documentation) | [Repositories](#repositories) | [Licensing](#licensing)
+
 _______
 
 # bbnavi: Documentation
+
 NOTE: This README is also available in German. Thank you for understanding that the German version might not always be up-to-date with the English one.
 
 HINWEIS: Diese README ist ebenfalls auf Deutsch verfügbar. Bitte haben Sie Verständnis, dass die deutsche Version nicht immer auf dem gleichen Stand wie die englische Version ist.
@@ -42,5 +45,12 @@ This repository contains the developer documentation and related content.
 ## Repositories
 _______________
 
+| Repository | Description
+| --- | --- | 
+| content | content |
+| n | n |
+| m | m |
 
+## Licensing
+____________
 
