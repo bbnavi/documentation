@@ -8,3 +8,5 @@ To view the resulting diagram, visit http://localhost:8080 in a browser window
 structurizr-cli push  -w data/deployments/standard_deployment.dsl -id 1 -key KEY -secret SECRET -url https://structurizr.bbnavi.de/api
 structurizr-cli push  -w data/bbnavi.dsl -id 3 -key KEY -secret SECRET -url https://structurizr.bbnavi.de/api
 ```
+![Logo](./images/bb-navi-app-rund-rot_png.png)
+# bbnavi-Documentation
