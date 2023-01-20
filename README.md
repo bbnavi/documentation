@@ -1,16 +1,10 @@
-### local development
-Navigate to `/lite` and run `docker compose up` <br />
-To view the resulting diagram, visit http://localhost:8080 in a browser window
+# Documentation
+<!-- markdownlint-disable MD041 -->
+<p align="center">
+ <a href="https://www.coronawarn.app/en/"><img src="./images/bb-navi-app-rund-rot_png.png" width="400"></a>
+</p>
 
-# Push documentation to online server structurizr.bbnavi.de
-
-```
-structurizr-cli push  -w data/deployments/standard_deployment.dsl -id 1 -key KEY -secret SECRET -url https://structurizr.bbnavi.de/api
-structurizr-cli push  -w data/bbnavi.dsl -id 3 -key KEY -secret SECRET -url https://structurizr.bbnavi.de/api
-```
-
-
-<img src="./images/bb-navi-app-rund-rot_png.png" class="center"></img>
+![Logo](./images/bb-navi-app-rund-rot_png.png)
 
 _______
 
@@ -25,29 +19,32 @@ NOTE: This README is also available in German. Thank you for understanding that 
 HINWEIS: Diese README ist ebenfalls auf Deutsch verfügbar. Bitte haben Sie Verständnis, dass die deutsche Version nicht immer auf dem gleichen Stand wie die englische Version ist.
 
 ## About this project
-_____________________
 
+---
 
 ## Who we are
-_____________
 
+_____
 
 ## Working language
+
 ___________________
 
-
 ## Our Documentation
+
 ____________________
 
 This repository contains the developer documentation and related content.
-### Project scope 
+
+### Project scope
 
 ## Repositories
+
 _______________
 
 | Repository | Description |
-| ---------- | ----------- | 
-| [amarillo](https://github.com/bbnavi/amarillo) | CRUD for carpool offers, description missing, https://amarillo.bbnavi.de/ | 
+| ---------- | ----------- |
+| [amarillo](https://github.com/bbnavi/amarillo) | CRUD for carpool offers, description missing, <https://amarillo.bbnavi.de/> |
 | [bbnavi-datahub](https://github.com/bbnavi/bbnavi-datahub) | Desription missing, readme with just one line, looking into docu from the fork |
 | [bbnavi-datahub-cms](https://github.com/bbnavi/bbnavi-datahub-cms) | An CMS based on JSON schema of smart-village api , description incomplete, readme incomplete, look into fork |
 | [bbnavi-datahub-json2graphql](https://github.com/bbnavi/bbnavi-datahub-json2graphql) | Handles defined JSON inputs and translates data to GraphQL endpoint on main-app-server, no Readme, look into fork |
@@ -63,17 +60,9 @@ _______________
 | [moqo2gbfs](https://github.com/bbnavi/moqo2gbfs) | Small python script, which generates a GBFS feed from MOQO's API |
 | [opendata-portal-tools](https://github.com/bbnavi/opendata-portal-tools) | Tools for managing the opendata.bbnavi.de MinIO instance |
 | [OpenTripPlanner](https://github.com/bbnavi/OpenTripPlanner) | MFDZ (HSLdevcom/)OpenTripPlanner clone supporting Carpooling. |
-| [opentripplaner-berlin-brandenburg](https://github.com/bbnavi/opentripplaner-berlin-brandenburg) | no desription, Readme with just log| 
+| [opentripplaner-berlin-brandenburg](https://github.com/bbnavi/opentripplaner-berlin-brandenburg) | no desription, Readme with just log|
 | [planetary-quantum](https://github.com/bbnavi/planetary-quantum)| Deploy complete Stack to Planetary Quantum, more description wanted, readme incomplete |
 
 ## Licensing
-____________
 
-<style>
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-</style>
+____________
