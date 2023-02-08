@@ -5,6 +5,7 @@ workspace "bbnavi" {
 
         user = person "bbnavi User" "Nutzer der eine Routingabfrage druchführen möchte" "User"
         # todo: OCPDB External Source
+        # todo: GeoCoding von HSL
 
         enterprise "bbnavi" {
             admin = person "bbnavi Admin" "Admin der die Datenbank pflegt" "Admin"
