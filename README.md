@@ -54,26 +54,11 @@ _______________
 | [bbnavi-datahub-tmb-importer](https://github.com/bbnavi/bbnavi-datahub-tmb-importer) | Converts XML Data from TMB (Tourismus Marketing Brandenburg) to JSON Data and sends them to a JSON API, Readme missing |
 | [cms](https://github.com/bbnavi/cms) | setup in reademe, no description, look into fork |
 | [commonsbooking2gbfs](https://github.com/bbnavi/commonsbooking2gbfs) | small python script, which generates a GBFS feed from CommonsBookings's fLotte map plugin API |
-| [digitransit-proxy](https://github.com/bbnavi/digitransit-proxy) | Digitransit proxy, small readme, look into fork from stadtnavi |
 | [digitransit-ui](https://github.com/bbnavi/digitransit-ui) | Digitransit UI clone for cities in Brandenburg ("bbnavi.de") |
 | [documentation](https://github.com/bbnavi/documentation) | Project overview and general documentation |
 | [gtfs-flex](https://github.com/bbnavi/gtfs-flex) | Generate a GTFS-Flex v2 feed for bbnavi |
 | [gtfs-rt-feed](https://github.com/bbnavi/gtfs-rt-feed) | Generates a GTFS Realtime feed by polling the VBB HAFAS API. (fork of derhuerst/berlin-gtfs-rt-server) |
-| [hsl-map-server](https://github.com/bbnavi/hsl-map-server) | no description, old readme, look into fork |
 | [moqo2gbfs](https://github.com/bbnavi/moqo2gbfs) | Small python script, which generates a GBFS feed from MOQO's API |
 | [opendata-portal-tools](https://github.com/bbnavi/opendata-portal-tools) | Tools for managing the opendata.bbnavi.de MinIO instance |
-| [OpenTripPlanner](https://github.com/bbnavi/OpenTripPlanner) | MFDZ (HSLdevcom/)OpenTripPlanner clone supporting Carpooling. |
 | [opentripplaner-berlin-brandenburg](https://github.com/bbnavi/opentripplaner-berlin-brandenburg) | no desription, Readme with just log| 
 | [planetary-quantum](https://github.com/bbnavi/planetary-quantum)| Deploy complete Stack to Planetary Quantum, more description wanted, readme incomplete |
-
-## Licensing
-____________
-
-<style>
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-</style>
