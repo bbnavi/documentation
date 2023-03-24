@@ -5,7 +5,6 @@ workspace "bbnavi" {
 
         user = person "bbnavi User" "Nutzer der eine Routingabfrage druchführen möchte" "User"
         # todo: OCPDB External Source
-        # todo: VBB GTFS external source
         # todo: nextbike gbfs external source
         # todo: donkey republic gbfs external source
         # todo: barshare moqo api external source
@@ -126,7 +125,17 @@ workspace "bbnavi" {
             }
         }
 
+        vbb = group "Verkehrsverbund Berlin-Brandenburg (VBB)" {
+            vbb_gtfs = softwareSystem "VBB-GTFS-Feed" {
+                url "https://www.vbb.de/vbb-services/api-open-data/datensaetze/"
+            }
+        }
+
         # Relations
+
+        # OTP
+        otp -> vbb_gtfs "importiert"
+        otp_staging -> vbb_gtfs "importiert"
 
         # Amarillo
         amarillo.service -> amarillo.filesystem "Lädt daten von"
