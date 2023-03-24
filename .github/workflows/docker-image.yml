@@ -1,0 +1,19 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    container: r.planetary-quantum.com/quantum-public/cli:2
+    env:
+      QUANTUM_USER: ${{ secrets.QUANTUM_USER }}
+      QUANTUM_PASSWORD: ${{ secrets.QUANTUM_PASSWORD }}
+      QUANTUM_ENDPOINT: "tpwd-bb-navi"
+      QUANTUM_STACK: "structurizr"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to Planetary Quantum
+        run: quantum-cli stacks update --create --wait

@@ -1,0 +1,29 @@
+version: '3.7'
+
+volumes:
+   structurizr-data:
+    external: true
+
+networks:
+  public:
+    external: true
+    name: public
+
+services:
+  structurizr:
+    image: structurizr/onpremises
+    networks:
+      - public
+    deploy:
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints:
+        - node.hostname == node-002.tpwd-bb-navi
+      labels:
+        traefik.enable: "true"
+        traefik.port: 8080
+        traefik.docker.network: public
+        traefik.frontend.rule: Host:structurizr.bbnavi.de
+    volumes:
+      - structurizr-data:/usr/local/structurizr
