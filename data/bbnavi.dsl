@@ -44,8 +44,9 @@ workspace "bbnavi" {
             # todo: publish-barshare-gbfs
             # todo: publish-flotte-gbfs
 
-            minio = softwareSystem "Minio" "S3 Storage"{
-                url "https://opendata.bbnavi.de"
+            open_data_portal = softwareSystem "OpenData-Portal" {
+                description "minIO-Instanz, Lesezugriff über HTTP oder AWS-S3-kompatible API"
+                url "https://opendata.bbnavi.de/"
             }
 
             datahub_group = group "Datahub" {
@@ -162,7 +163,7 @@ workspace "bbnavi" {
         user -> digitransit "Nutzt"
         user -> wordpress_mitfahren "Nutzt"
         user -> wordpress_bbnavi "Nutzt"
-        user -> minio "Nutzt direkt Daten von"
+        user -> open_data_portal "Nutzt direkt Daten von"
         admin -> tmb_importer.app "Kontrolliert Datenbestand von"
         admin -> datahub_cms "Kontrolliert Datenbestand"
         admin -> datahub_server.app "Verwaltet Datenlieferanten"
