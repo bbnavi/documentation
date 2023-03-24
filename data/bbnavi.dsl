@@ -44,8 +44,23 @@ workspace "bbnavi" {
                 url "https://github.com/bbnavi/gtfs-flex"
                 # todo: add generate-gtfs-flex once it is used (https://github.com/bbnavi/gtfs-flex/issues/5)
             }
-            # todo: publish-barshare-gbfs
-            # todo: publish-flotte-gbfs
+
+            publish_barshare_gbfs = softwareSystem "publish-barshare-gbfs" {
+                description "generiert den BarShare-GBFS-Feed"
+                url "https://github.com/bbnavi/moqo2gbfs/tree/main/publish-barshare-gbfs"
+                moqo2gbfs = container "moqo2gbfs" {
+                    description "generiert einen GBFS-Feed aus einer MOQO-API"
+                    url "https://github.com/bbnavi/moqo2gbfs"
+                }
+            }
+            publish_flotte_gbfs = softwareSystem "publish-flotte-gbfs" {
+                description "generiert den fLotte-GBFS-Feed"
+                url "https://github.com/bbnavi/commonsbooking2gbfs/tree/main/publish-flotte-gbfs"
+                commonsbooking2gbfs = container "commonsbooking2gbfs" {
+                    description "generiert einen GBFS-Feed aus einer CommonsBookings-API"
+                    url "https://github.com/bbnavi/commonsbooking2gbfs"
+                }
+            }
 
             open_data_portal = softwareSystem "OpenData-Portal" {
                 description "minIO-Instanz, Lesezugriff über HTTP oder AWS-S3-kompatible API"
@@ -53,6 +68,14 @@ workspace "bbnavi" {
                 vbb_gtfs_flex_bucket = container "Bucket vbb-gtfs-flex" {
                     description "S3-Bucket für den GTFS-Flex-Feed"
                     url "https://opendata.bbnavi.de/vbb-gtfs-flex/index.html"
+                }
+                barshare_gbfs_bucket = container "Bucket barshare" {
+                    description "S3-Bucket für den BarShare-GBFS-Feed"
+                    url "https://opendata.bbnavi.de/barshare/index.html"
+                }
+                flotte_gbfs_bucket = container "Bucket flotte" {
+                    description "S3-Bucket für den fLotte-GBFS-Feed"
+                    url "https://opendata.bbnavi.de/flotte/index.html"
                 }
             }
 
@@ -158,6 +181,17 @@ workspace "bbnavi" {
         # otp -> open_data_portal.vbb_gtfs_flex_bucket "lädt Daten von"
         otp_staging -> open_data_portal.vbb_gtfs_flex_bucket "lädt Daten von"
 
+        # BarShare GBFS-Feed
+        publish_barshare_gbfs -> open_data_portal.barshare_gbfs_bucket "veröffentlicht Daten auf"
+        otp -> open_data_portal.barshare_gbfs_bucket "lädt Daten von"
+        otp_staging -> open_data_portal.barshare_gbfs_bucket "lädt Daten von"
+
+        # fLotte GBFS-Feed
+        publish_flotte_gbfs -> open_data_portal.flotte_gbfs_bucket "veröffentlicht Daten auf"
+        # todo: this doesn't happen yet on production (https://tpwd.atlassian.net/browse/BBNAV-211)
+        # otp -> open_data_portal.flotte_gbfs_bucket "lädt Daten von"
+        otp_staging -> open_data_portal.flotte_gbfs_bucket "lädt Daten von"
+
         # Digitransit Relations
         digitransit -> otp "Sammelt Daten von"
         digitransit -> odbcp_proxy "Sammelt Daten von"
@@ -245,6 +279,15 @@ workspace "bbnavi" {
         }
 
         container gtfs_flex_generator {
+            include *
+            autoLayout
+        }
+
+        container publish_barshare_gbfs {
+            include *
+            autoLayout
+        }
+        container publish_flotte_gbfs {
             include *
             autoLayout
         }
