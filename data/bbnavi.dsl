@@ -24,8 +24,15 @@ workspace "bbnavi" {
                 url "https://bad-belzig.bbnavi.de"
             }
 
-            otp = softwareSystem "OpenTripPlanner"
-            otp_staging = softwareSystem "OpenTripPlanner Staging"
+            # todo: GitHub Action (graph build) vs deployed service
+            otp_group = group "OpenTripPlanner (OTP)" {
+                otp = softwareSystem "OpenTripPlanner" {
+                    url "https://api.bbnavi.de/"
+                }
+                otp_staging = softwareSystem "OpenTripPlanner Staging" {
+                    url "https://staging.api.bbnavi.de/"
+                }
+            }
 
             # todo: temporary amarillo dev/staging feed (amarillo-dev.mfdz.de)?
             amarillo = softwareSystem "Amarillo" {
