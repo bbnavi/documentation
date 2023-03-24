@@ -39,13 +39,21 @@ workspace "bbnavi" {
                 filesystem = container "Amarillo Filesystem"
             }
 
-            # todo: GTFS-Flex feed generator
+            gtfs_flex_generator = softwareSystem "GTFS-Flex-Feed-Generator" {
+                description "GitHub-Action, die einen GTFS-Flex-Feed generiert"
+                url "https://github.com/bbnavi/gtfs-flex"
+                # todo: add generate-gtfs-flex once it is used (https://github.com/bbnavi/gtfs-flex/issues/5)
+            }
             # todo: publish-barshare-gbfs
             # todo: publish-flotte-gbfs
 
             open_data_portal = softwareSystem "OpenData-Portal" {
                 description "minIO-Instanz, Lesezugriff über HTTP oder AWS-S3-kompatible API"
                 url "https://opendata.bbnavi.de/"
+                vbb_gtfs_flex_bucket = container "Bucket vbb-gtfs-flex" {
+                    description "S3-Bucket für den GTFS-Flex-Feed"
+                    url "https://opendata.bbnavi.de/vbb-gtfs-flex/index.html"
+                }
             }
 
             datahub_group = group "Datahub" {
@@ -143,6 +151,13 @@ workspace "bbnavi" {
         # Datahub
         otp -> amarillo.service "Lädt Daten von"
 
+        # GTFS-Flex-Feed
+        gtfs_flex_generator -> vbb_gtfs "lädt und verarbeit"
+        gtfs_flex_generator -> open_data_portal.vbb_gtfs_flex_bucket "veröffentlicht Daten auf"
+        # todo: this doesn't happen yet on production
+        # otp -> open_data_portal.vbb_gtfs_flex_bucket "lädt Daten von"
+        otp_staging -> open_data_portal.vbb_gtfs_flex_bucket "lädt Daten von"
+
         # Digitransit Relations
         digitransit -> otp "Sammelt Daten von"
         digitransit -> odbcp_proxy "Sammelt Daten von"
@@ -225,6 +240,11 @@ workspace "bbnavi" {
         }
 
         systemcontext amarillo "Amarillo" {
+            include *
+            autoLayout
+        }
+
+        container gtfs_flex_generator {
             include *
             autoLayout
         }
