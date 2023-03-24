@@ -5,12 +5,21 @@ workspace "bbnavi" {
 
         user = person "bbnavi User" "Nutzer der eine Routingabfrage druchführen möchte" "User"
         # todo: OCPDB External Source
-        # todo: GeoCoding von HSL
+        # todo: VBB GTFS external source
+        # todo: nextbike gbfs external source
+        # todo: donkey republic gbfs external source
+        # todo: barshare moqo api external source
+        # todo: flotte commonsbooking api external source
+        # todo: stadtnavi tiles server
+        # todo: stadtnavi photon
+        # todo: gtfs-rt via hafas mgate (including VBB HAFAS external source)?
+        # todo: gtfs-rt via vbb-dds (including VBB-DDS external source)?
 
         enterprise "bbnavi" {
             admin = person "bbnavi Admin" "Admin der die Datenbank pflegt" "Admin"
             data_provider = person "Datenlieferant" "Datenanbieter für Imports oder Echtzeitdate" "Data Provider"
 
+            # todo: other digitransit-ui instances, including staging.bbnavi.de
             digitransit = softwareSystem "Digitransit" {
                 url "https://bad-belzig.bbnavi.de"
             }
@@ -18,15 +27,15 @@ workspace "bbnavi" {
             otp = softwareSystem "OpenTripPlanner"
             otp_staging = softwareSystem "OpenTripPlanner Staging"
 
-            # todo: amarillo
+            # todo: temporary amarillo dev/staging feed (amarillo-dev.mfdz.de)?
             amarillo = softwareSystem "Amarillo" {
                 service = container "Amarillo Service"
                 filesystem = container "Amarillo Filesystem"
             }
-            # todo: barshare-gbfs
 
-            # todo: staging-otp
-            # todo: staging-digitransit
+            # todo: GTFS-Flex feed generator
+            # todo: publish-barshare-gbfs
+            # todo: publish-flotte-gbfs
 
             minio = softwareSystem "Minio" "S3 Storage"{
                 url "https://opendata.bbnavi.de"
