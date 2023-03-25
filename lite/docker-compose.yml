@@ -3,5 +3,7 @@ services:
     image: structurizr/lite
     volumes:
       - ../data:/usr/local/structurizr
+    environment:
+      STRUCTURIZR_WORKSPACE_FILENAME: bbnavi
     ports:
       - 8080:8080
