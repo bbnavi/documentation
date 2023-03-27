@@ -213,7 +213,6 @@ workspace "bbnavi" {
         digitransit -> odbcp_proxy "Sammelt Daten von"
         digitransit -> datahub_server.tile_server "Sammelt Daten von"
         digitransit -> datahub_server.app "Sammelt Daten per GraphQl von"
-        digitransit -> minio "??? Sammelt Daten von"
         digitransit -> monitoring.matomo "Sendet Daten zu"
 
         # datahub internal relations
