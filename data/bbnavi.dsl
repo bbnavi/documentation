@@ -5,10 +5,6 @@ workspace "bbnavi" {
 
         user = person "bbnavi User" "Nutzer der eine Routingabfrage druchführen möchte" "User"
         # todo: OCPDB External Source
-        # todo: nextbike gbfs external source
-        # todo: donkey republic gbfs external source
-        # todo: barshare moqo api external source
-        # todo: flotte commonsbooking api external source
         # todo: stadtnavi tiles server
         # todo: stadtnavi photon
         # todo: gtfs-rt via hafas mgate (including VBB HAFAS external source)?
@@ -130,6 +126,22 @@ workspace "bbnavi" {
             }
         }
 
+
+        sharing_provider = group "Sharing-Anbieter" {
+            sharing_provider_nextbike = softwareSystem "Sharing-Anbieter nextbike" "Sharing" {
+                url "https://gbfs.nextbike.net/"
+            }
+            sharing_provider_donkey_republic = softwareSystem "Sharing-Anbieter Donkey Republic" "Sharing" {
+                url "https://www.donkey.bike/"
+            }
+            sharing_provider_barshare = softwareSystem "Sharing-Anbieter BARShare" "Sharing" {
+                url "https://portal.moqo.de/"
+            }
+            sharing_provider_flotte = softwareSystem "Sharing-Anbieter fLotte" "Sharing" {
+                url "https://flotte-berlin.de/"
+            }
+        }
+        
         # Monitoring Services
         monitoring = softwareSystem "Monitoring und Logs" "Sammelstelle für Logs und Monitoring" "Monitor" {
             pn_group = group "Planetary Networks"{
@@ -183,7 +195,11 @@ workspace "bbnavi" {
         # OTP
         otp -> vbb_gtfs "importiert"
         otp_staging -> vbb_gtfs "importiert"
-
+        otp -> sharing_provider_nextbike "Bezieht Standort-/Verfügbarkeitsdaten von"
+        otp_staging -> sharing_provider_nextbike "Bezieht Standort-/Verfügbarkeitsdaten von"
+        otp -> sharing_provider_donkey_republic "Bezieht Standort-/Verfügbarkeitsdaten von"
+        otp_staging -> sharing_provider_donkey_republic "Bezieht Standort-/Verfügbarkeitsdaten von"
+        
         # Amarillo
         amarillo.service -> amarillo.filesystem "Lädt daten von"
 
@@ -199,11 +215,13 @@ workspace "bbnavi" {
 
         # BarShare GBFS-Feed
         publish_barshare_gbfs -> open_data_portal.barshare_gbfs_bucket "veröffentlicht Daten auf"
+        publish_barshare_gbfs -> sharing_provider_barshare "ruft Standort-/Verfügbarkeitsdaten ab"
         otp -> open_data_portal.barshare_gbfs_bucket "lädt Daten von"
         otp_staging -> open_data_portal.barshare_gbfs_bucket "lädt Daten von"
 
         # fLotte GBFS-Feed
         publish_flotte_gbfs -> open_data_portal.flotte_gbfs_bucket "veröffentlicht Daten auf"
+        publish_flotte_gbfs -> sharing_provider_flotte "ruft Standort-/Verfügbarkeitsdaten ab"
         # todo: this doesn't happen yet on production (https://tpwd.atlassian.net/browse/BBNAV-211)
         # otp -> open_data_portal.flotte_gbfs_bucket "lädt Daten von"
         otp_staging -> open_data_portal.flotte_gbfs_bucket "lädt Daten von"
