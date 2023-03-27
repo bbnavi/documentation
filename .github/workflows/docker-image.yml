@@ -1,11 +1,19 @@
-name: Docker Image CI
+name: deploy structurizr workspace to Planetary Quantum
 
 on:
   push:
     branches: [ main ]
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: use the Structurizr CLI to validate
+        run: |
+          docker run -i --rm -v $PWD/data:/data structurizr/cli validate -w /data/bbnavi.dsl
   deploy:
+    needs: validate
     runs-on: ubuntu-latest
     container: r.planetary-quantum.com/quantum-public/cli:2
     env:
