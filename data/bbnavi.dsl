@@ -5,8 +5,6 @@ workspace "bbnavi" {
 
         user = person "bbnavi User" "Nutzer der eine Routingabfrage druchführen möchte" "User"
         # todo: OCPDB External Source
-        # todo: stadtnavi tiles server
-        # todo: stadtnavi photon
         # todo: gtfs-rt via hafas mgate (including VBB HAFAS external source)?
         # todo: gtfs-rt via vbb-dds (including VBB-DDS external source)?
         # todo: github container registry
@@ -126,6 +124,20 @@ workspace "bbnavi" {
             }
         }
 
+        stadtnavi = softwareSystem "stadtnavi" "Stellt Basisdienste wie Adresssuche und Kartendienst bereit" {
+            geocoder = container "Geocoding-Service" "Adress-Suche (und Reverse-Suche) auf Basis von Photon" {
+                url "https://photon.stadtnavi.eu/pelias/v1"
+            }
+
+            tileserver = container "TileServer" "Kartendienst für verschiedene (OSM) Kartenlayer" {
+                url "https://tiles.stadtnavi.eu"
+            }
+        }
+
+        # External Systems
+        external_routing_service = softwareSystem "Routing-Service" "Routing-Service für PKW-Routing" "Routing" {
+            url "https://api.mfdz.de/gh"
+        }
 
         sharing_provider = group "Sharing-Anbieter" {
             sharing_provider_nextbike = softwareSystem "Sharing-Anbieter nextbike" "Sharing" {
@@ -232,6 +244,8 @@ workspace "bbnavi" {
         digitransit -> datahub_server.tile_server "Sammelt Daten von"
         digitransit -> datahub_server.app "Sammelt Daten per GraphQl von"
         digitransit -> monitoring.matomo "Sendet Daten zu"
+        digitransit -> stadtnavi.geocoder "Nutzt zur Adresssuche"
+        digitransit -> stadtnavi.tileserver "Zeigt (Hintergrund-)Karten von"
 
         # datahub internal relations
         datahub_server.app -> datahub_server.db "Schreibt Daten in"
