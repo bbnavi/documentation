@@ -13,6 +13,22 @@ workspace "bbnavi" {
         # todo: stadtnavi photon
         # todo: gtfs-rt via hafas mgate (including VBB HAFAS external source)?
         # todo: gtfs-rt via vbb-dds (including VBB-DDS external source)?
+        # todo: github container registry
+        # todo: gitlab container registry, e.g.
+        #   - datahub
+        #   - datahub tileserver
+        #   - datahub json2graphql image + base image
+        #   - datahub cms
+        #   - datahub tmb importer
+        #   - otp + otp staging
+        #   - publish-barshare-gbfs
+        #   - publish-flotte-gbfs
+        #   - amarillo
+        # todo: mfdz docker images
+        #   - otp (https://github.com/bbnavi/opentripplaner-berlin-brandenburg/blob/8231e157b5609a9b5230b356fc5db3a80eedde1b/Dockerfile#L4)
+        # todo: mfdz graphhopper instance?
+        #   - amarillo (https://github.com/bbnavi/amarillo/blob/cf90ae3df4092121a56d08611e5515cd995a1c9b/app/services/routing.py#L13)
+        # todo: r.planetary-quantum.com/quantum-public/cli:2 docker image
 
         enterprise "bbnavi" {
             admin = person "bbnavi Admin" "Admin der die Datenbank pflegt" "Admin"
