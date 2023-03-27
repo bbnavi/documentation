@@ -3,7 +3,7 @@ workspace "bbnavi" {
 
     model {
 
-        user = person "bbnavi User" "Nutzer der eine Routingabfrage druchführen möchte" "User"
+        user = person "bbnavi User" "Nutzer, der eine Routingabfrage durchführen möchte" "User"
         # todo: OCPDB External Source
         # todo: gtfs-rt via hafas mgate (including VBB HAFAS external source)?
         # todo: gtfs-rt via vbb-dds (including VBB-DDS external source)?
@@ -18,7 +18,7 @@ workspace "bbnavi" {
         #   - publish-barshare-gbfs
         #   - publish-flotte-gbfs
         #   - amarillo
-        # todo: mfdz docker images
+        # todo: mfdz docker images (Will be replaced by upstream otp image soon)
         #   - otp (https://github.com/bbnavi/opentripplaner-berlin-brandenburg/blob/8231e157b5609a9b5230b356fc5db3a80eedde1b/Dockerfile#L4)
         # todo: r.planetary-quantum.com/quantum-public/cli:2 docker image
 
