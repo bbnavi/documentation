@@ -1,10 +1,8 @@
 # Documentation
 <!-- markdownlint-disable MD041 -->
 <p align="center">
- <a href="https://www.coronawarn.app/en/"><img src="./images/bb-navi-app-rund-rot_png.png" width="400"></a>
+ <a><img src="./images/bb-navi-app-rund-rot_png.png" width="300"></a>
 </p>
-
-![Logo](./images/bb-navi-app-rund-rot_png.png)
 
 _______
 
@@ -14,9 +12,9 @@ _______
 
 # bbnavi: Documentation
 
-NOTE: This README is also available in German. Thank you for understanding that the German version might not always be up-to-date with the English one.
+NOTE: This README is also available in English. Thank you for understanding that the English version might not always be up-to-date with the German one.
 
-HINWEIS: Diese README ist ebenfalls auf Deutsch verfügbar. Bitte haben Sie Verständnis, dass die deutsche Version nicht immer auf dem gleichen Stand wie die englische Version ist.
+HINWEIS: Diese README ist ebenfalls auf Englisch verfügbar. Bitte haben Sie Verständnis, dass die englische Version nicht immer auf dem gleichen Stand wie die deutsche Version ist.
 
 ## About this project
 
@@ -42,8 +40,8 @@ This repository contains the developer documentation and related content.
 
 _______________
 
-| Repository | Description |
-| ---------- | ----------- |
+| Repository | Description | Lizenz |
+| ---------- | ----------- | ---------- |
 | [amarillo](https://github.com/bbnavi/amarillo) | CRUD for carpool offers, description missing, <https://amarillo.bbnavi.de/> |
 | [bbnavi-datahub](https://github.com/bbnavi/bbnavi-datahub) | Desription missing, readme with just one line, looking into docu from the fork |
 | [bbnavi-datahub-cms](https://github.com/bbnavi/bbnavi-datahub-cms) | An CMS based on JSON schema of smart-village api , description incomplete, readme incomplete, look into fork |
