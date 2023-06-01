@@ -151,6 +151,10 @@ workspace "bbnavi" {
                 url "https://flotte-berlin.de/"
             }
         }
+
+        lgb_tileserver = softwareSystem "LGB-Kartenkacheln" "Hintergrundkacheln der Landesvermessung und Geobasisinformation Brandenburg" {
+            url "https://geobasis-bb.de/lgb/de/dienstleister/geodateninfrastruktur/geodienste/"
+        }
         
         # Monitoring Services
         monitoring = softwareSystem "Monitoring und Logs" "Sammelstelle für Logs und Monitoring" "Monitor" {
@@ -248,6 +252,7 @@ workspace "bbnavi" {
         digitransit -> monitoring.matomo "Sendet Daten zu"
         digitransit -> stadtnavi.geocoder "Nutzt zur Adresssuche"
         digitransit -> stadtnavi.tileserver "Zeigt (Hintergrund-)Karten von"
+        digitransit -> lgb_tileserver "Zeigt (Hintergrund-)Karten von"
 
         # datahub internal relations
         datahub_server.app -> datahub_server.db "Schreibt Daten in"
