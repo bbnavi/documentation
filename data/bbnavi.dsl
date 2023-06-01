@@ -1,4 +1,4 @@
-workspace "bbnavi" {
+bbnavi = workspace "bbnavi" {
     !identifiers hierarchical
 
     model {
@@ -26,7 +26,7 @@ workspace "bbnavi" {
             data_provider = person "Datenlieferant" "Datenanbieter für Imports oder Echtzeitdate" "Data Provider"
 
             # todo: other digitransit-ui instances, including staging.bbnavi.de
-            digitransit = softwareSystem "Digitransit" {
+            digitransit = softwareSystem "digitransit-ui" {
                 url "https://bad-belzig.bbnavi.de"
             }
 
@@ -42,6 +42,7 @@ workspace "bbnavi" {
 
             # todo: temporary amarillo dev/staging feed (amarillo-dev.mfdz.de)?
             amarillo = softwareSystem "Amarillo" {
+                url "https://amarillo.bbnavi.de/"
                 service = container "Amarillo Service"
                 filesystem = container "Amarillo Filesystem"
             }
@@ -216,6 +217,8 @@ workspace "bbnavi" {
         otp_staging -> sharing_provider_nextbike "Bezieht Standort-/Verfügbarkeitsdaten von"
         otp -> sharing_provider_donkey_republic "Bezieht Standort-/Verfügbarkeitsdaten von"
         otp_staging -> sharing_provider_donkey_republic "Bezieht Standort-/Verfügbarkeitsdaten von"
+        otp -> amarillo.service "Lädt Daten von"
+        otp_staging -> amarillo.service "Lädt Daten von"
 
         # OCPDB
         odbcp_proxy -> ocpdb "fragt Vektorkacheln ab von"
@@ -225,10 +228,6 @@ workspace "bbnavi" {
         # https://github.com/bbnavi/amarillo/blob/cf90ae3df4092121a56d08611e5515cd995a1c9b/app/services/routing.py#L13)
         amarillo.service -> external_routing_service "Ermittelt mutmaßliche Route"
         amarillo.service -> datahub_server "Importiert Mitfahrparkplätze"
-
-
-        # Datahub
-        otp -> amarillo.service "Lädt Daten von"
 
         # GTFS-Flex-Feed
         gtfs_flex_generator -> vbb_gtfs "lädt und verarbeit"
@@ -251,9 +250,10 @@ workspace "bbnavi" {
         otp_staging -> open_data_portal.flotte_gbfs_bucket "lädt Daten von"
 
         # Digitransit Relations
-        digitransit -> otp "Sammelt Daten von"
-        digitransit -> odbcp_proxy "Sammelt Daten von"
-        digitransit -> datahub_server.tile_server "Sammelt Daten von"
+        digitransit -> otp "fragt Daten per GraphQl ab von"
+        digitransit -> otp "fragt Vektorkacheln ab von"
+        digitransit -> odbcp_proxy "fragt Vektorkacheln ab von"
+        digitransit -> datahub_server.tile_server "fragt Vektorkacheln ab von"
         digitransit -> datahub_server.app "Sammelt Daten per GraphQl von"
         digitransit -> monitoring.matomo "Sendet Daten zu"
         digitransit -> stadtnavi.geocoder "Nutzt zur Adresssuche"
