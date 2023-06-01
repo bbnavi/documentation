@@ -4,7 +4,6 @@ workspace "bbnavi" {
     model {
 
         user = person "bbnavi User" "Nutzer, der eine Routingabfrage durchführen möchte" "User"
-        # todo: OCPDB External Source
         # todo: gtfs-rt via hafas mgate (including VBB HAFAS external source)?
         # todo: gtfs-rt via vbb-dds (including VBB-DDS external source)?
         # todo: github container registry
@@ -155,6 +154,10 @@ workspace "bbnavi" {
         lgb_tileserver = softwareSystem "LGB-Kartenkacheln" "Hintergrundkacheln der Landesvermessung und Geobasisinformation Brandenburg" {
             url "https://geobasis-bb.de/lgb/de/dienstleister/geodateninfrastruktur/geodienste/"
         }
+
+        ocpdb = softwareSystem "OCPDB" "Open Charge Point Database" {
+            url "https://ocpdb.de"
+        }
         
         # Monitoring Services
         monitoring = softwareSystem "Monitoring und Logs" "Sammelstelle für Logs und Monitoring" "Monitor" {
@@ -213,6 +216,9 @@ workspace "bbnavi" {
         otp_staging -> sharing_provider_nextbike "Bezieht Standort-/Verfügbarkeitsdaten von"
         otp -> sharing_provider_donkey_republic "Bezieht Standort-/Verfügbarkeitsdaten von"
         otp_staging -> sharing_provider_donkey_republic "Bezieht Standort-/Verfügbarkeitsdaten von"
+
+        # OCPDB
+        odbcp_proxy -> ocpdb "fragt Vektorkacheln ab von"
         
         # Amarillo
         amarillo.service -> amarillo.filesystem "Lädt daten von"
